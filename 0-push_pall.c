@@ -1,18 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
-#define STACK_SIZE 100
-
-typedef struct stack_s
-{
-    int n;
-    struct stack_s *prev;
-    struct stack_s *next;
-} stack_t;
-
-stack_t *stack = NULL;
-
-void push(int value)
+/**
+ * f_push - Implements the push opcode.
+ * @head: Double pointer to the head of the stack.
+ * @number: The integer value to push onto the stack.
+ */
+void f_push(stack_t **head, unsigned int number)
 {
     stack_t *new_node = malloc(sizeof(stack_t));
     if (new_node == NULL)
@@ -21,33 +14,29 @@ void push(int value)
         exit(EXIT_FAILURE);
     }
 
-    new_node->n = value;
+    new_node->n = number;
     new_node->prev = NULL;
-    new_node->next = stack;
+    new_node->next = *head;
 
-    if (stack != NULL)
-        stack->prev = new_node;
+    if (*head != NULL)
+        (*head)->prev = new_node;
 
-    stack = new_node;
+    *head = new_node;
 }
 
-void pall()
+/**
+ * f_pall - Implements the pall opcode.
+ * @head: Double pointer to the head of the stack.
+ * @number: Line number (unused).
+ */
+void f_pall(stack_t **head, unsigned int number)
 {
-    stack_t *current = stack;
+    (void)number;
+    stack_t *current = *head;
 
     while (current != NULL)
     {
         printf("%d\n", current->n);
         current = current->next;
     }
-}
-
-int main()
-{
-    push(1);
-    push(2);
-    push(3);
-    pall();
-
-    return 0;
 }
