@@ -31,8 +31,9 @@ void f_push(stack_t **head, unsigned int number)
  */
 void f_pall(stack_t **head, unsigned int number)
 {
+    stack_t *current;
     (void)number;
-    stack_t *current = *head;
+    current = *head;
 
     while (current != NULL)
     {
