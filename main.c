@@ -10,7 +10,7 @@ bus_t bus = {NULL, NULL, NULL, 0};
  */
 int main(int argc, char *argv[])
 {
-	char *content = NULL; // Initialize content to NULL
+	char *content = NULL;
 	FILE *file;
 	size_t size = 0;
 	stack_t *stack = NULL;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 		execute(content, &stack, counter, file);
 	}
 	free_stack(stack);
-	free(content); // Free the allocated memory
+	free(content);
 	fclose(file);
 	return (0);
 }
